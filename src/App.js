@@ -1,26 +1,33 @@
-import logo from "./logo.svg";
+import React, { useState } from "react";
 import "./App.css";
 import Button from "react-bootstrap/Button";
-import {
-  Container,
-  Nav,
-  NavDropdown,
-  Navbar,
-  Spinner,
-  Stack,
-} from "react-bootstrap";
+import CloseButton from "react-bootstrap/CloseButton";
+import Name from "./product/Name";
+import Description from "./product/Description";
+import Image from "./product/Image";
+import Price from "./product/Price";
+import { Container, Nav, NavDropdown, Navbar } from "react-bootstrap";
 
 function App() {
+  const [nom, setNom] = useState("nom de produit");
+  const [prix, setPrix] = useState(19.99);
+  const [description, setDescription] = useState("Description du produit");
+
+  const updateAttributes = () => {
+    setNom("Nouveau nom");
+    setPrix(29.99);
+    setDescription("Nouvelle description");
+  };
   return (
     <div className="App">
       <Navbar bg="light" expand="lg">
         <Container>
-          <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+          <Navbar.Brand href="#home">products</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="#home">Home</Nav.Link>
-              <Nav.Link href="#link">Link</Nav.Link>
+              <Nav.Link href="#contact">contact</Nav.Link>
+              <Nav.Link href="#about">about</Nav.Link>
               <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">
@@ -41,52 +48,13 @@ function App() {
       <Nav
         activeKey="/home"
         onSelect={(selectedKey) => alert(`selected ${selectedKey}`)}
-      >
-        <Nav.Item>
-          <Nav.Link href="/home">Active</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link eventKey="link-1">Link</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link eventKey="link-2">Link</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link eventKey="disabled" disabled>
-            Disabled
-          </Nav.Link>
-        </Nav.Item>
-      </Nav>
-      <Button variant="primary">Primary</Button>{" "}
-      <Button variant="secondary">Secondary</Button>{" "}
-      <Button variant="success">Success</Button>{" "}
-      <Button variant="warning">Warning</Button>{" "}
-      <Button variant="danger">Danger</Button>{" "}
-      <Button variant="info">Info</Button>{" "}
-      <Button variant="light">Light</Button>{" "}
-      <Button variant="dark">Dark</Button>
-      <Button variant="link">Link</Button>
-      <Spinner animation="border" variant="primary" />
-      <Spinner animation="border" variant="secondary" />
-      <Spinner animation="border" variant="success" />
-      <Spinner animation="border" variant="danger" />
-      <Spinner animation="border" variant="warning" />
-      <Spinner animation="border" variant="info" />
-      <Spinner animation="border" variant="light" />
-      <Spinner animation="border" variant="dark" />
-      <Spinner animation="grow" variant="primary" />
-      <Spinner animation="grow" variant="secondary" />
-      <Spinner animation="grow" variant="success" />
-      <Spinner animation="grow" variant="danger" />
-      <Spinner animation="grow" variant="warning" />
-      <Spinner animation="grow" variant="info" />
-      <Spinner animation="grow" variant="light" />
-      <Spinner animation="grow" variant="dark" />
-      <Stack gap={3} className="st1">
-        <div className="bg-warning border">First item</div>
-        <div className="bg-warning border">Second item</div>
-        <div className="bg-warning border">Third item</div>
-      </Stack>
+      ></Nav>
+       <Image imageSource="/src/images/your-image.jpg" alt="Your Image" />
+      <Name nom={nom} />
+      <Price prix={prix} />
+      <Description description={description} />
+      <p>Hallo</p>
+      <button onClick={updateAttributes}>Mettre à jour les attributs</button>
     </div>
   );
 }
